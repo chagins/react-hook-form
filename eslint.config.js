@@ -7,7 +7,7 @@ import {config, configs} from 'typescript-eslint';
 export default config(
   {
     ignores: ['dist', 'eslint.config.js'],
-    extends: [js.configs.recommended, ...configs.strictTypeChecked, ...configs.stylisticTypeChecked],
+    extends: [...configs.strictTypeChecked, ...configs.stylisticTypeChecked],
     files: ['**/*.{ts,tsx,js}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -24,10 +24,18 @@ export default config(
     rules: {
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "error",
-      'react-refresh/only-export-components': [
+      "react-refresh/only-export-components": [
         'warn',
         { allowConstantExport: true },
       ],
+      "@typescript-eslint/no-misused-promises": [
+        "error",
+        {
+          "checksVoidReturn": {
+            attributes: false
+          }
+        }
+      ]
     },
   },
 )
