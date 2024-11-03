@@ -1,3 +1,5 @@
+import { UserFormProvider } from "@/features/users";
+
 export const App = () => {
-  return <div>App</div>;
+  return <UserFormProvider />;
 };
