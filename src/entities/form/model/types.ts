@@ -1,4 +1,11 @@
+export enum GenderEnum {
+  female = "female",
+  male = "male",
+  other = "other",
+}
+
 export interface Inputs {
-  example: string;
-  exampleRequired: string;
-};
+  firstName: string;
+  gender: GenderEnum;
+  age: number;
+}
