@@ -1,13 +1,16 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import styles from "./App.module.css";
 import { IFormValues } from "@/entities/form";
-import { Input } from "@/features/Input";
-import { InputRHF } from "@/features/InputRHF";
-import { Select } from "@/features/Select";
-import { SelectRHF } from "@/features/SelectRHF";
+import { Input } from "@mui/material";
+import Select from "react-select";
 
 export const App = () => {
-  const { register, handleSubmit } = useForm<IFormValues>();
+  const { handleSubmit, control } = useForm<IFormValues>({
+    defaultValues: {
+      firstName: "",
+      iceCreamType: undefined,
+    },
+  });
 
   const onSubmit: SubmitHandler<IFormValues> = (data): void => {
     console.log(data);
@@ -20,10 +23,28 @@ export const App = () => {
         className={styles.Form}
         onSubmit={(event) => void handleSubmit(onSubmit)(event)}
       >
-        <Input label="First Name" required />
-        <InputRHF label="First Name" register={register} required />
-        <Select label="Age" />
-        <SelectRHF label="Age" {...register("age")} />
+        <Controller
+          name="firstName"
+          control={control}
+          render={({ field }) => {
+            console.log({ field });
+            return <Input {...field} />;
+          }}
+        />
+        <Controller
+          name="iceCreamType"
+          control={control}
+          render={({ field }) => (
+            <Select
+              {...field}
+              options={[
+                { value: "chocolate", label: "Chocolate" },
+                { value: "strawberry", label: "Strawberry" },
+                { value: "vanilla", label: "Vanilla" },
+              ]}
+            />
+          )}
+        />
         <input type="submit" />
       </form>
     </>

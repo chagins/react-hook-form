@@ -1,4 +1,9 @@
 export interface IFormValues {
-  "First Name": string;
-  age: number;
+  firstName: string | undefined;
+  iceCreamType: IceCreamType | undefined;
+}
+
+export interface IceCreamType {
+  value: string;
+  label: string;
 }
